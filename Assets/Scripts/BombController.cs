@@ -33,6 +33,7 @@ public class BombController : MonoBehaviour
         {
             StartCoroutine(PlaceBomb());
         }
+        
     }
     IEnumerator PlaceBomb()
     {
@@ -97,6 +98,21 @@ public class BombController : MonoBehaviour
             destructibleTiles.SetTile(cell, null);
         }
     }
+
+    public void AddBomb()
+    {
+        bombAmount++;
+        bombRemaining++;
+    }
+
+   /* public void BombButton()
+    {
+        if (bombRemaining > 0)
+        {
+            StartCoroutine(PlaceBomb());
+        }
+          
+    }*/
 
     private void OnTriggerExit2D(Collider2D collision)
     {

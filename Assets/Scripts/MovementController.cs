@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class MovementController : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class MovementController : MonoBehaviour
     public AnimatedSpriteRenderer spriteRendererDown;
     public AnimatedSpriteRenderer spriteRendererLeft;
     public AnimatedSpriteRenderer spriteRendererRight;
+    public AnimatedSpriteRenderer spriteRendererDeath;
     private AnimatedSpriteRenderer activeSpriteRenderer;
 
     private void Awake()
@@ -27,21 +29,45 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(inputUp))
+     
+       /*   if(CrossPlatformInputManager.GetButton("InputUp"))
+          {
+              SetDirection(Vector2.up,spriteRendererUp);
+          }else if(CrossPlatformInputManager.GetButton("InputDown"))
+          {
+              SetDirection(Vector2.down,spriteRendererDown);
+          }else if(CrossPlatformInputManager.GetButton("InputLeft"))
+          {
+              SetDirection(Vector2.left,spriteRendererLeft);
+          }else if(CrossPlatformInputManager.GetButton("InputRight"))
+          {
+              SetDirection(Vector2.right,spriteRendererRight);
+          }else
+          {
+              SetDirection(Vector2.zero,activeSpriteRenderer);
+          }*/
+
+
+
+        if (Input.GetKey(inputUp))
         {
-            SetDirection(Vector2.up,spriteRendererUp);
-        }else if(Input.GetKey(inputDown))
+            SetDirection(Vector2.up, spriteRendererUp);
+        }
+        else if (Input.GetKey(inputDown))
         {
-            SetDirection(Vector2.down,spriteRendererDown);
-        }else if(Input.GetKey(inputLeft))
+            SetDirection(Vector2.down, spriteRendererDown);
+        }
+        else if (Input.GetKey(inputLeft))
         {
-            SetDirection(Vector2.left,spriteRendererLeft);
-        }else if(Input.GetKey(inputRight))
+            SetDirection(Vector2.left, spriteRendererLeft);
+        }
+        else if (Input.GetKey(inputRight))
         {
-            SetDirection(Vector2.right,spriteRendererRight);
-        }else
+            SetDirection(Vector2.right, spriteRendererRight);
+        }
+        else
         {
-            SetDirection(Vector2.zero,activeSpriteRenderer);
+            SetDirection(Vector2.zero, activeSpriteRenderer);
         }
 
     }
@@ -65,5 +91,32 @@ public class MovementController : MonoBehaviour
 
         activeSpriteRenderer = spriteRenderer;
         activeSpriteRenderer.idle = direction == Vector2.zero;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer==LayerMask.NameToLayer("Explosion"))
+        {
+            DeathSequence();
+        }
+    }
+
+    void DeathSequence()
+    {
+        enabled = false;
+        GetComponent<BombController>().enabled = false;
+
+        spriteRendererUp.enabled = false;
+        spriteRendererDown.enabled = false;
+        spriteRendererLeft.enabled = false;
+        spriteRendererRight.enabled = false;
+        spriteRendererDeath.enabled = true;
+
+        Invoke(nameof(OnDeathSequenceEnded), 1.25f);
+    }
+
+    void OnDeathSequenceEnded()
+    {
+        gameObject.SetActive(false);
+        FindObjectOfType<GameManager>().CheckWinState();
     }
 }
