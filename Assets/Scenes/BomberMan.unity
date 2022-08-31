@@ -5289,9 +5289,6 @@ GameObject:
   - component: {fileID: 1219109949}
   - component: {fileID: 1219109948}
   - component: {fileID: 1219109946}
-  - component: {fileID: 1219109952}
-  - component: {fileID: 1219109951}
-  - component: {fileID: 1219109953}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Player
@@ -5308,21 +5305,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1219109945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eec4f8daf5a3263499041ccbff400122, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c5d77ba08db19b4fb3f8eb1c466ccf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputKey: 8
-  bombPrefab: {fileID: 8600244518583807988, guid: 5532a1f5229f05f4a9f49bdd51a6da24, type: 3}
-  bombFuseTime: 3
-  bombAmount: 1
-  explosionPrefab: {fileID: 5071128087989332572, guid: 95399b40e3100d04fae0a988475b74a0, type: 3}
-  explosionLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  explosionDuration: 1
-  explosionRadius: 1
-  destructibleTiles: {fileID: 413830872}
-  destructiblePrefab: {fileID: 547734140404855772, guid: f3701882c00a4994091f723ec1c45f9a, type: 3}
+  speed: 5
+  spriteRendererUp: {fileID: 0}
+  spriteRendererDown: {fileID: 0}
+  spriteRendererLeft: {fileID: 0}
+  spriteRendererRight: {fileID: 0}
+  spriteRendererDeath: {fileID: 0}
 --- !u!58 &1219109948
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5379,90 +5370,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1219109951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219109945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 5
-  radius: 0.3
-  height: 2
-  canMove: 1
-  maxSpeed: 2
-  gravity: {x: NaN, y: NaN, z: NaN}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  centerOffsetCompatibility: NaN
-  repathRateCompatibility: NaN
-  canSearchCompability: 0
-  orientation: 1
-  enableRotation: 1
-  autoRepath:
-    mode: 2
-    interval: 0.5
-    sensitivity: 10
-    maximumInterval: 2
-    visualizeSensitivity: 0
-  targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
-  rotationSpeed: 360
-  slowdownDistance: 1.05
-  pickNextWaypointDist: 2
-  endReachedDistance: 1.19
-  alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
-  constrainInsideGraph: 0
---- !u!114 &1219109952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219109945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
---- !u!114 &1219109953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219109945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 1074831672}
 --- !u!1 &1295546068
 GameObject:
   m_ObjectHideFlags: 0
