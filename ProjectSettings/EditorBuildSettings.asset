@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/BomberMan.unity
+    path: Assets/Scenes/Menu.unity
+    guid: 09c5dbc7d7bed0045979ead102837a95
+  - enabled: 1
+    path: Assets/Scenes/BomberBot.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Loading.unity
+    guid: 417b1ad89b4984a48a61b67984047cac
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Lobby.unity
+    guid: b6b28ce709fe7b34d8b5d6090259d3aa
+  - enabled: 1
+    path: Assets/Scenes/BomberMan.unity
+    guid: 994e4a2388c438147a9aec016e6ae74f
   m_configObjects: {}

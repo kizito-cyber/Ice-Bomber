@@ -18,9 +18,11 @@ public class BombController : MonoBehaviour
     public int explosionRadius = 1;
 
     [Header("Destrutible")]
-    public Tilemap destructibleTiles;
+     //Tilemap destructibleTiles;
     public Destructible destructiblePrefab;
 
+
+   
 
     private void OnEnable()
     {
@@ -89,13 +91,13 @@ public class BombController : MonoBehaviour
 
     void ClearDestructible(Vector2 position)
     {
-        Vector3Int cell = destructibleTiles.WorldToCell(position);
-        TileBase tile = destructibleTiles.GetTile(cell);
+        Vector3Int cell = DestructibleTiles.instance.destructibleTiles.WorldToCell(position);
+        TileBase tile = DestructibleTiles.instance.destructibleTiles.GetTile(cell);
 
         if(tile != null)
         {
             Instantiate(destructiblePrefab, position, Quaternion.identity);
-            destructibleTiles.SetTile(cell, null);
+            DestructibleTiles.instance.destructibleTiles.SetTile(cell, null);
         }
     }
 

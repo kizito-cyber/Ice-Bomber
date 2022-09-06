@@ -1,8 +1,10 @@
 
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Photon.Pun;
 
-public class MovementController : MonoBehaviour
+
+public class MovementController : MonoBehaviourPunCallbacks
 {
     public new Rigidbody2D rigidbody { get; private set; }
     private Vector2 direction = Vector2.down;
@@ -21,8 +23,14 @@ public class MovementController : MonoBehaviour
     public AnimatedSpriteRenderer spriteRendererDeath;
     private AnimatedSpriteRenderer activeSpriteRenderer;
 
-    private void Awake()
+
+    PhotonView view;
+
+    
+   
+    private void Start()
     {
+        view = GetComponent<PhotonView>();
         rigidbody = GetComponent<Rigidbody2D>();
         activeSpriteRenderer = spriteRendererDown;
     }
@@ -48,36 +56,45 @@ public class MovementController : MonoBehaviour
           }*/
 
 
+       if(view.IsMine)
+        {
+            if (Input.GetKey(inputUp))
+            {
+                SetDirection(Vector2.up, spriteRendererUp);
+            }
+            else if (Input.GetKey(inputDown))
+            {
+                SetDirection(Vector2.down, spriteRendererDown);
+            }
+            else if (Input.GetKey(inputLeft))
+            {
+                SetDirection(Vector2.left, spriteRendererLeft);
+            }
+            else if (Input.GetKey(inputRight))
+            {
+                SetDirection(Vector2.right, spriteRendererRight);
+            }
+            else
+            {
+                SetDirection(Vector2.zero, activeSpriteRenderer);
+            }
+        }
 
-        if (Input.GetKey(inputUp))
-        {
-            SetDirection(Vector2.up, spriteRendererUp);
-        }
-        else if (Input.GetKey(inputDown))
-        {
-            SetDirection(Vector2.down, spriteRendererDown);
-        }
-        else if (Input.GetKey(inputLeft))
-        {
-            SetDirection(Vector2.left, spriteRendererLeft);
-        }
-        else if (Input.GetKey(inputRight))
-        {
-            SetDirection(Vector2.right, spriteRendererRight);
-        }
-        else
-        {
-            SetDirection(Vector2.zero, activeSpriteRenderer);
-        }
+
+      
 
     }
 
     private void FixedUpdate()
     {
-        Vector2 position = rigidbody.position;
-        Vector2 translation = direction * speed * Time.fixedDeltaTime;
+        if (view.IsMine)
+        {
 
-        rigidbody.MovePosition(position + translation);
+            Vector2 position = rigidbody.position;
+            Vector2 translation = direction * speed * Time.fixedDeltaTime;
+
+            rigidbody.MovePosition(position + translation);
+        }
     }
 
     void SetDirection(Vector2 newDirection, AnimatedSpriteRenderer spriteRenderer)
@@ -118,5 +135,13 @@ public class MovementController : MonoBehaviour
     {
         gameObject.SetActive(false);
         FindObjectOfType<GameManager>().CheckWinState();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            DeathSequence();
+        }
     }
 }
